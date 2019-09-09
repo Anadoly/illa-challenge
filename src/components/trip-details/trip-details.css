@@ -1,0 +1,27 @@
+.trip-details__wrapper {
+  display: flex;
+
+}
+.trip-details {
+  width: 40%;
+  text-align: left
+}
+.trip-details h2  {
+  margin-top: 0;
+}
+.trip-details  p + h2  {
+  margin-top: 40px;
+}
+
+.trip-map {
+  width: 60%;
+  min-height: 70vh;
+}
+
+
+.map-container,
+.map {
+  width: 100%;
+  display: inline-block;
+  min-height: 70vh;
+}

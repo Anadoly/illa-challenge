@@ -1,0 +1,62 @@
+.trips-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.trips-wrapper p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.trips-wrapper > div {
+ width: 33.33%;
+ min-height: 150px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+}
+.trips-wrapper > div  a {
+  color: initial;
+  text-decoration: none;
+  display: inline-block;
+}
+.car-motion {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+.car-motion__wrapper {
+  background-image: url(./images/road-orange.svg);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  text-align: right;
+  animation: 5s linear infinite road;
+  position: relative;
+  top: 0;
+}
+.car-motion__wrapper img {
+  animation: carAnimation ease-in-out 1s infinite alternate;
+  position: relative;
+  right: 100px;
+  width: 100px;
+  height: 100px;
+  right: 20%;
+}
+
+@keyframes carAnimation {
+  0% {
+    top: 25px;
+  }
+
+  100% {
+    top: 15px;
+  }
+}
+@keyframes road {
+  0% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: -130px 100%;
+  }
+}
