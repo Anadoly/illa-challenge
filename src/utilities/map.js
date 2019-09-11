@@ -6,6 +6,7 @@ import {
   withScriptjs,
   DirectionsRenderer,
 } from "react-google-maps";
+import PropTypes from 'prop-types';
 import CustomMarker from './custom-marker'
 
 class MapDirectionsRenderer extends React.Component {
@@ -69,5 +70,20 @@ const Map = withScriptjs(
     </GoogleMap>
   ))
 );
+
+Map.propTypes = {
+  defaultCenter: PropTypes.object.isRequired,
+  defaultZoom: PropTypes.number.isRequired,
+  markers: PropTypes.array.isRequired,
+  loadingElement: PropTypes.object.isRequired,
+  containerElement: PropTypes.object.isRequired,
+  mapElement: PropTypes.object.isRequired,
+  googleMapURL: PropTypes.string.isRequired, 
+};
+
+MapDirectionsRenderer.propTypes = { 
+  places: PropTypes.array.isRequired,
+  travelMode: PropTypes.string.isRequired,
+}
 
 export default Map;

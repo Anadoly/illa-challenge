@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './trip-details.css';
 import Map from '../../utilities/map';
 import TruckDetails from './truck-details'
+import PropTypes from 'prop-types';
 
 export default class TripDetails extends Component {
   state = {
@@ -35,7 +36,9 @@ export default class TripDetails extends Component {
     const mapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=geometry,drawing,places`
     return (
       <section className='trip-details__wrapper'>
-        <TruckDetails trip={trip} />
+        {trip &&
+          <TruckDetails trip={trip} />
+        }
         <div className='trip-map'>
           {trip &&
             <Map
@@ -55,4 +58,10 @@ export default class TripDetails extends Component {
   }
 }
 
-
+TripDetails.propTypes = {
+  defaultCenter: PropTypes.object,
+  defaultZoom: PropTypes.number,
+  loadingElement: PropTypes.object,
+  containerElement: PropTypes.object,
+  mapElement: PropTypes.object,
+};

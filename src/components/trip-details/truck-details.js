@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class TruckDetails extends Component {
   render() {
     const {trip} = this.props;
     return (
-      
       <div className='trip-details'>
         {trip &&
           <>
@@ -22,4 +22,8 @@ export default class TruckDetails extends Component {
       </div>
     )
   }
+}
+
+TruckDetails.propTypes = {
+  trip: PropTypes.object.isRequired,
 }
