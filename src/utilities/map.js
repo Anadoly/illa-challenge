@@ -4,9 +4,9 @@ import {
   withGoogleMap,
   GoogleMap,
   withScriptjs,
-  Marker,
-  DirectionsRenderer
+  DirectionsRenderer,
 } from "react-google-maps";
+import CustomMarker from './custom-marker'
 
 class MapDirectionsRenderer extends React.Component {
   state = {
@@ -19,13 +19,10 @@ class MapDirectionsRenderer extends React.Component {
     
     const waypoints = places.map(p =>({
         location: {lat: Number(p.lat), lng: Number(p.long)},
-        stopover: true
+        stopover: false,
     }))
     const origin = waypoints.shift().location;
     const destination = waypoints.pop().location;
-    
-    
-
     const directionsService = new google.maps.DirectionsService();
     directionsService.route(
       {
@@ -54,15 +51,16 @@ class MapDirectionsRenderer extends React.Component {
   }
 }
 
+
+
 const Map = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       defaultCenter={props.defaultCenter}
-      defaultZoom={props.defaultZoom}
+      defaultZoom={props.defaultZoom} 
     >
       {props.markers.map((marker, index) => {
-        const position = { lat: Number(marker.lat), lng: Number(marker.long) };
-        return <Marker key={index} position={position}/>;
+        return <CustomMarker key={index} marker={marker}/>
       })}
       <MapDirectionsRenderer
         places={props.markers}

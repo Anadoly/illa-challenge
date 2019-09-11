@@ -12,6 +12,10 @@
 .trip-details  p + h2  {
   margin-top: 40px;
 }
+.trip-details a {
+  color: #fff;
+  text-decoration: none;
+}
 
 .trip-map {
   width: 60%;

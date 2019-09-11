@@ -6,7 +6,6 @@ import './App.css';
 
 
 const App = () => {
-  console.log(process.env.REACT_APP_BACK_END_API)
   return (
     <div className={'container'}>
       <h1>Illa Challenge</h1>
@@ -14,7 +13,6 @@ const App = () => {
         <Route exact path="/" component={Trips} />
         <Route exact path="/trips/:id" component={TripDetails} />
       </Switch>
-      
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './trip-details.css';
 import Map from '../../utilities/map';
+import TruckDetails from './truck-details'
 
 export default class TripDetails extends Component {
   state = {
@@ -16,10 +17,9 @@ export default class TripDetails extends Component {
           params: { id },
         },
       } = this.props;
-      console.log(id)
       fetch(`${process.env.REACT_APP_BACK_END_API}/trips/${id}`)
         .then(response => response.json())
-        .then(data => this.setState({ trip: data.data  }));
+        .then(response => this.setState({ trip: response.data  }));
     }
   }
 
@@ -32,25 +32,14 @@ export default class TripDetails extends Component {
       defaultCenter,
       defaultZoom,
     } = this.props;
+    const mapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=geometry,drawing,places`
     return (
       <section className='trip-details__wrapper'>
-        <div className='trip-details'>
-          <h2> Trip Details</h2>
-          <p>Trip Duration: {trip && trip.trip_duration} minutes</p>
-          <h2>Truck Details</h2>
-          <p>Truck Type: {trip && trip.truck.truck_type}</p>
-          <p>Truck License: {trip && trip.truck.license_number}</p>
-          <p>Trip notes: {trip && trip.trip.notes}</p>
-        </div>
+        <TruckDetails trip={trip} />
         <div className='trip-map'>
-          {
-            trip &&
+          {trip &&
             <Map
-              googleMapURL={
-                'https://maps.googleapis.com/maps/api/js?key=' +
-                process.env.REACT_APP_MAPS_API_KEY +
-                '&libraries=geometry,drawing,places'
-              }
+              googleMapURL={mapURL}
               markers={trip.routes}
               loadingElement={loadingElement || <div className='map-loading' />}
               containerElement={containerElement || <div className='map-container'/>}
