@@ -17,9 +17,8 @@ class MapDirectionsRenderer extends React.Component {
 
   componentDidMount() {
     const { places, travelMode } = this.props;
-    
     const waypoints = places.map(p =>({
-        location: {lat: Number(p.lat), lng: Number(p.long)},
+        location: {lat: Number(p.lat), lng: Number(p.lng)},
         stopover: false,
     }))
     const origin = waypoints.shift().location;
@@ -45,10 +44,11 @@ class MapDirectionsRenderer extends React.Component {
   }
 
   render() {
-    if (this.state.error) {
-      return <h1>{this.state.error.status}</h1>;
+    const { error, directions } = this.state;
+    if (error) {
+      return <h1>{error.status}</h1>;
     }
-    return (this.state.directions && <DirectionsRenderer directions={this.state.directions} />)
+    return (directions && <DirectionsRenderer directions={directions} />)
   }
 }
 
@@ -61,7 +61,7 @@ const Map = withScriptjs(
       defaultZoom={props.defaultZoom} 
     >
       {props.markers.map((marker, index) => {
-        return <CustomMarker key={index} marker={marker}/>
+        return ((index !==0 && index !== props.markers.length-1) ? <CustomMarker key={index} marker={marker}/> : null)
       })}
       <MapDirectionsRenderer
         places={props.markers}

@@ -13,8 +13,9 @@ class CustomMarker extends Component{
     this.setState({showInfo: false})
   }
   render(){
+    const { showInfo } = this.state;
     const { marker} = this.props;
-    const position = { lat: Number(marker.lat), lng: Number(marker.long) }; 
+    const position = { lat: Number(marker.lat), lng: Number(marker.lng) }; 
     const moving_time = new Date(marker.moving_time);
     const arrival_time = new Date(marker.arrival_time);
     let Difference_In_Time = moving_time.getTime() - arrival_time.getTime();
@@ -29,9 +30,9 @@ class CustomMarker extends Component{
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
       >
-        {this.state.showInfo && (
+        {showInfo && (
           <InfoWindow>
-            <p style={{color: '#000'}}>The truck was waiting for {hours} hours and {minutes}  minutes</p>
+            <p style={{color: '#000'}}>The truck was waiting for {hours > 0 ? `${hours} hours and` : '' } {minutes}  minutes</p>
           </InfoWindow>
         )}
       </Marker>
